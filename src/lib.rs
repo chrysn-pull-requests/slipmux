@@ -163,19 +163,19 @@ pub enum Error {
 
 /// Short hand for `encode(Slipmux::Diagnostic(text.to_owned()))`
 #[must_use]
-pub fn encode_diagnostic(text: &str) -> ([u8; 256], usize) {
+pub fn encode_diagnostic(text: &str) -> ([u8; 2048], usize) {
     encode(Slipmux::Diagnostic(text.to_owned()))
 }
 
 /// Short hand for `encode(Slipmux::Configuration(packet))`
 #[must_use]
-pub fn encode_configuration(packet: Vec<u8>) -> ([u8; 256], usize) {
+pub fn encode_configuration(packet: Vec<u8>) -> ([u8; 2048], usize) {
     encode(Slipmux::Configuration(packet))
 }
 
 /// Short hand for `encode(Slipmux::Packet(packet))`
 #[must_use]
-pub fn encode_packet(packet: Vec<u8>) -> ([u8; 256], usize) {
+pub fn encode_packet(packet: Vec<u8>) -> ([u8; 2048], usize) {
     encode(Slipmux::Packet(packet))
 }
 
@@ -183,10 +183,10 @@ pub fn encode_packet(packet: Vec<u8>) -> ([u8; 256], usize) {
 ///
 /// # Panics
 ///
-/// Will panic if the encoded input does not fit into 256 byte buffer.
+/// Will panic if the encoded input does not fit into 2048 byte buffer.
 #[must_use]
-pub fn encode(input: Slipmux) -> ([u8; 256], usize) {
-    let mut buffer = [0; 256];
+pub fn encode(input: Slipmux) -> ([u8; 2048], usize) {
+    let mut buffer = [0; 2048];
     let mut slip = Encoder::new();
     let mut totals = EncodeTotals {
         read: 0,
